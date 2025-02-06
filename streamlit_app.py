@@ -54,3 +54,17 @@ else:
         with st.chat_message("assistant"):
             response = st.write_stream(stream)
         st.session_state.messages.append({"role": "assistant", "content": response})
+
+import json
+# Function to save session state to a JSON file
+def save_session_state_to_json():
+    session_data = {key: value for key, value in st.session_state.items()}
+    with open("session_data.json", "w", encoding="utf-8") as json_file:
+        json.dump(session_data, json_file, ensure_ascii=False, indent=4)
+    st.success("Session state saved successfully as session_data.json")
+
+st.title("Session State Exporter")
+
+if st.button("Save Session State"):
+    save_session_state_to_json()
+
