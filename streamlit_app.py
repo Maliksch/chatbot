@@ -9,6 +9,19 @@ st.write(
     "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
 )
 
+import json
+# Function to save session state to a JSON file
+def save_session_state_to_json():
+    session_data = {key: value for key, value in st.session_state.items()}
+    with open("session_data.json", "w", encoding="utf-8") as json_file:
+        json.dump(session_data, json_file, ensure_ascii=False, indent=4)
+    st.success("Session state saved successfully as session_data.json")
+
+st.title("Session State Exporter")
+
+if st.button("Save Session State"):
+    save_session_state_to_json()
+
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
 # via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
@@ -55,16 +68,5 @@ else:
             response = st.write_stream(stream)
         st.session_state.messages.append({"role": "assistant", "content": response})
 
-import json
-# Function to save session state to a JSON file
-def save_session_state_to_json():
-    session_data = {key: value for key, value in st.session_state.items()}
-    with open("session_data.json", "w", encoding="utf-8") as json_file:
-        json.dump(session_data, json_file, ensure_ascii=False, indent=4)
-    st.success("Session state saved successfully as session_data.json")
 
-st.title("Session State Exporter")
-
-if st.button("Save Session State"):
-    save_session_state_to_json()
 
