@@ -12,10 +12,10 @@ st.write(
 import json
 # Function to save session state to a JSON file
 def save_session_state_to_json():
-    session_data = {key: value for key, value in st.session_state.items()}
-    with open("session_data.json", "w", encoding="utf-8") as json_file:
-        json.dump(session_data, json_file, ensure_ascii=False, indent=4)
-    st.success("Session state saved successfully as session_data.json")
+    Data = {key: value for key, value in st.session_state.items()}
+    with open("Data.json", "w", encoding="utf-8") as json_file:
+        json.dump(Data, json_file, ensure_ascii=False, indent=4)
+    st.success("Session state saved successfully")
 
 st.title("Session State Exporter")
 
